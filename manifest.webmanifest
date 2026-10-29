@@ -1,0 +1,12 @@
+{
+  "name": "Moeda preparada para o El Niño 2026/2027",
+  "short_name": "El Niño Moeda",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#EAF4FB",
+  "theme_color": "#164370",
+  "icons": [
+    { "src": "assets/img/icone-192.png", "sizes": "192x192", "type": "image/png" }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "fonte": "INMET",
+  "estacao": null,
+  "atualizado_em": null,
+  "umidade": {
+    "valor": null,
+    "tipo": "observada"
+  },
+  "previsao": []
+}

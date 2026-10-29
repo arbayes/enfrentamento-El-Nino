@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moeda preparada para o El Niño 2026/2027 | Defesa Civil de Moeda</title>
+  <meta name="description" content="Informação e prevenção para proteger a população de Moeda/MG durante o El Niño 2026/2027: previsão do tempo, umidade do ar, cuidados com o calor e prevenção da dengue.">
+  <meta name="theme-color" content="#164370">
+  <meta property="og:title" content="Moeda preparada para o El Niño 2026/2027">
+  <meta property="og:description" content="Informação e prevenção para proteger nossa população. Defesa Civil de Moeda/MG.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="js/painel.js" defer></script>
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="topo__faixa">
+      <img class="topo__logo" src="assets/img/logo-prefeitura-moeda.webp" width="700" height="303"
+           alt="Prefeitura Municipal de Moeda">
+      <p class="topo__orgao">Prefeitura Municipal de Moeda · Defesa Civil de Moeda</p>
+      <h1>Moeda preparada para o El Niño 2026/2027</h1>
+      <p class="topo__lema">Informação e prevenção para proteger nossa população.</p>
+    </div>
+  </header>
+
+  <nav class="atalhos" aria-label="Atalhos da página">
+    <ul>
+      <li><a href="#el-nino">El Niño</a></li>
+      <li><a href="#tempo">Tempo</a></li>
+      <li><a href="#umidade">Umidade</a></li>
+      <li><a href="#calor">Calor</a></li>
+      <li><a href="#dengue">Dengue</a></li>
+      <li><a href="#avisos">Avisos</a></li>
+    </ul>
+  </nav>
+
+  <main id="conteudo">
+
+    <!-- 1. O que é o El Niño -->
+    <section id="el-nino" class="bloco" aria-labelledby="t-el-nino">
+      <h2 id="t-el-nino">O que é o El Niño?</h2>
+      <p>O El Niño é um fenômeno climático caracterizado pelo aquecimento anormal das águas superficiais do Oceano Pacífico equatorial. Ele pode alterar os padrões de chuva e temperatura em diferentes regiões do planeta, mas seus efeitos variam conforme a região, a época do ano e a interação com outros fatores climáticos.</p>
+
+      <h3>O que pode acontecer em Moeda</h3>
+      <ul class="riscos">
+        <li>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-termometro"/></svg>
+          <span><strong>Calor intenso</strong> e mais desconforto térmico</span>
+        </li>
+        <li>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-gota"/></svg>
+          <span><strong>Baixa umidade do ar</strong>, que exige mais cuidado com a saúde</span>
+        </li>
+        <li>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-fogo"/></svg>
+          <span><strong>Maior risco de incêndios</strong> em vegetação seca</span>
+        </li>
+        <li>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-torneira"/></svg>
+          <span><strong>Estiagem</strong> e pressão sobre o abastecimento de água</span>
+        </li>
+        <li>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-chuva"/></svg>
+          <span><strong>Episódios de chuva intensa</strong> também podem ocorrer</span>
+        </li>
+      </ul>
+
+      <p class="nota">O El Niño, isoladamente, não permite prever o tempo exato de cada dia em Moeda. Consulte as informações meteorológicas atualizadas e siga as orientações dos órgãos oficiais.</p>
+    </section>
+
+    <!-- 2. Painel meteorológico -->
+    <section id="tempo" class="bloco" aria-labelledby="t-tempo">
+      <h2 id="t-tempo">Previsão do tempo em Moeda</h2>
+
+      <div class="painel" id="painel-tempo" aria-live="polite">
+        <div class="painel__aviso" id="painel-indisponivel">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-info"/></svg>
+          <div>
+            <p><strong>Dados temporariamente indisponíveis.</strong></p>
+            <p>Consulte a previsão e os alertas diretamente no INMET pelo botão abaixo.</p>
+          </div>
+        </div>
+
+        <div class="painel__dados" id="painel-dados" hidden>
+          <div class="painel__agora">
+            <p class="painel__rotulo" id="painel-umidade-tipo">Umidade relativa do ar</p>
+            <p class="painel__umidade"><span id="painel-umidade">--</span><span class="painel__unidade">%</span></p>
+            <p class="painel__nivel" id="painel-nivel"></p>
+          </div>
+          <ul class="painel__dias" id="painel-dias"></ul>
+          <dl class="painel__meta">
+            <div><dt>Estação de referência</dt><dd id="painel-estacao">--</dd></div>
+            <div><dt>Atualizado em</dt><dd id="painel-atualizado">--</dd></div>
+          </dl>
+        </div>
+
+        <a class="botao" href="https://portal.inmet.gov.br/" target="_blank" rel="noopener">
+          Consultar previsão e alertas no INMET
+        </a>
+        <p class="fonte">Fonte: Instituto Nacional de Meteorologia (INMET). A disponibilidade e a representatividade dos dados dependem do produto meteorológico e da estação consultada.</p>
+      </div>
+    </section>
+
+    <!-- 3. Quadro de umidade -->
+    <section id="umidade" class="bloco" aria-labelledby="t-umidade">
+      <h2 id="t-umidade">Como agir conforme a umidade do ar</h2>
+      <p>Confira a umidade relativa do ar e siga as orientações de cada faixa.</p>
+
+      <ol class="niveis">
+        <li class="nivel nivel--acompanhar" data-nivel="acompanhar">
+          <div class="nivel__cabeca">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-check"/></svg>
+            <span class="nivel__nome">Acompanhar</span>
+            <span class="nivel__faixa">Acima de 30%</span>
+          </div>
+          <p>Mantenha a hidratação, proteja-se do sol e acompanhe a previsão.</p>
+        </li>
+        <li class="nivel nivel--atencao" data-nivel="atencao">
+          <div class="nivel__cabeca">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-alerta"/></svg>
+            <span class="nivel__nome">Atenção</span>
+            <span class="nivel__faixa">21% a 30%</span>
+          </div>
+          <p>Beba água ao longo do dia; evite exposição prolongada ao sol e esforço físico intenso nos horários mais quentes; procure sombra e ambientes ventilados.</p>
+        </li>
+        <li class="nivel nivel--alerta" data-nivel="alerta">
+          <div class="nivel__cabeca">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-alerta"/></svg>
+            <span class="nivel__nome">Alerta</span>
+            <span class="nivel__faixa">12% a 20%</span>
+          </div>
+          <p>Reforce a hidratação; reduza atividades físicas ao ar livre; evite exposição prolongada ao sol; dê atenção especial a crianças, idosos e pessoas vulneráveis.</p>
+        </li>
+        <li class="nivel nivel--emergencia" data-nivel="emergencia">
+          <div class="nivel__cabeca">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-sirene"/></svg>
+            <span class="nivel__nome">Emergência</span>
+            <span class="nivel__faixa">Abaixo de 12%</span>
+          </div>
+          <p>Siga os avisos oficiais e as orientações das autoridades. Reduza a exposição ao calor. Medidas adicionais para atividades externas e escolares são avaliadas pelos órgãos competentes.</p>
+        </li>
+      </ol>
+
+      <p class="nota">Este quadro é informativo. Situações de emergência e medidas da Prefeitura são comunicadas oficialmente pela Defesa Civil e pelos órgãos competentes. A umidade não deve ser avaliada isoladamente: temperatura, duração do período seco e exposição ao sol também importam.</p>
+    </section>
+
+    <!-- 4. Calor e sol -->
+    <section id="calor" class="bloco" aria-labelledby="t-calor">
+      <h2 id="t-calor">Proteja-se do calor e do sol</h2>
+      <ul class="dicas">
+        <li><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-copo"/></svg><span>Beba água regularmente, sem esperar sentir sede.</span></li>
+        <li><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-arvore"/></svg><span>Procure sombra e locais frescos e ventilados, especialmente nos períodos mais quentes.</span></li>
+        <li><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-pessoa"/></svg><span>Evite ou reduza exercícios e trabalhos físicos intensos ao ar livre nos horários de maior calor.</span></li>
+        <li><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-chapeu"/></svg><span>Use roupas leves e, ao ar livre, chapéu ou boné e protetor solar conforme as instruções do produto.</span></li>
+        <li><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-familia"/></svg><span>Dê atenção especial a crianças, idosos, pessoas doentes e trabalhadores expostos ao calor.</span></li>
+        <li><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-pausa"/></svg><span>Em atividades ao ar livre, faça pausas para hidratação e procure sombra.</span></li>
+        <li><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-fogo"/></svg><span>Não faça queimadas e evite fontes de fumaça.</span></li>
+      </ul>
+      <p class="destaque">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-saude"/></svg>
+        <span>Se houver mal-estar importante ou sinais de agravamento, procure um serviço de saúde.</span>
+      </p>
+    </section>
+
+    <!-- 5. Arboviroses -->
+    <section id="dengue" class="bloco" aria-labelledby="t-dengue">
+      <h2 id="t-dengue">Previna a dengue, a chikungunya e a zika</h2>
+      <p>Essas doenças são transmitidas principalmente pela picada de mosquitos infectados. Eliminar os locais onde o mosquito se reproduz é uma das principais formas de prevenção.</p>
+      <ul class="dicas">
+        <li><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-vaso"/></svg><span>Não deixe água acumulada em pratos de plantas, pneus, garrafas, baldes, lonas ou outros recipientes.</span></li>
+        <li><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-caixa"/></svg><span>Mantenha caixas-d’água, tonéis e reservatórios bem fechados.</span></li>
+        <li><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-lixo"/></svg><span>Limpe calhas e ralos e descarte corretamente o lixo.</span></li>
+        <li><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-virar"/></svg><span>Vire recipientes vazios para baixo e guarde pneus em local coberto.</span></li>
+        <li><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-spray"/></svg><span>Use repelente registrado e siga as instruções do rótulo, inclusive quanto à idade e à frequência de aplicação.</span></li>
+        <li><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-casa"/></svg><span>Use telas em portas e janelas quando possível e receba os agentes de saúde e de combate às endemias.</span></li>
+      </ul>
+      <p class="destaque">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-saude"/></svg>
+        <span>Em caso de sintomas, procure orientação de um serviço de saúde. Não se automedique.</span>
+      </p>
+    </section>
+
+    <!-- 6. Links oficiais -->
+    <section id="avisos" class="bloco" aria-labelledby="t-avisos">
+      <h2 id="t-avisos">Acompanhe os avisos oficiais</h2>
+      <ul class="links">
+        <li>
+          <a href="https://portal.inmet.gov.br/" target="_blank" rel="noopener">
+            <span class="links__titulo">INMET — Previsão do tempo</span>
+            <span class="links__url">portal.inmet.gov.br</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://alertas2.inmet.gov.br/" target="_blank" rel="noopener">
+            <span class="links__titulo">INMET — Avisos meteorológicos</span>
+            <span class="links__url">alertas2.inmet.gov.br</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/d/dengue/faq/dengue/como-se-prevenir-da-dengue" target="_blank" rel="noopener">
+            <span class="links__titulo">Ministério da Saúde — Prevenção da dengue</span>
+            <span class="links__url">gov.br/saude</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p><strong>Realização:</strong> Prefeitura Municipal de Moeda e Defesa Civil de Moeda.</p>
+    <p><strong>Apoio:</strong> Secretarias Municipais de Saúde, Meio Ambiente e Educação.</p>
+    <p class="rodape__aviso">Conteúdo informativo e preventivo. Não substitui alertas oficiais, avaliação médica nem os protocolos da Prefeitura e da Defesa Civil. Acompanhe os canais oficiais da Prefeitura e da Defesa Civil de Moeda.</p>
+    <p class="rodape__revisao">Última revisão dos textos: <time datetime="2026-10-29">29/10/2026</time></p>
+  </footer>
+
+  <!-- Ícones (traço simples, herdam a cor do texto) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="i-termometro" viewBox="0 0 24 24"><path d="M14 14.8V4a2 2 0 0 0-4 0v10.8a4 4 0 1 0 4 0Z"/><path d="M12 9v8"/></symbol>
+    <symbol id="i-gota" viewBox="0 0 24 24"><path d="M12 3s-6 6.6-6 11a6 6 0 0 0 12 0c0-4.4-6-11-6-11Z"/></symbol>
+    <symbol id="i-fogo" viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 0 7-7c0-4-3-6.5-4-10-2 2-2.5 4-2.5 5.5C11 9 10 7.5 10 6c-3 2.5-5 5.5-5 9a7 7 0 0 0 7 7Z"/></symbol>
+    <symbol id="i-torneira" viewBox="0 0 24 24"><path d="M4 10h9a4 4 0 0 1 4 4v1"/><path d="M4 6v8"/><path d="M8 6V3h4"/><path d="M17 19s-1.5 1.7-1.5 2.5a1.5 1.5 0 0 0 3 0C18.5 20.7 17 19 17 19Z"/></symbol>
+    <symbol id="i-chuva" viewBox="0 0 24 24"><path d="M7 15a5 5 0 1 1 1.3-9.8A6 6 0 0 1 19 9a4 4 0 0 1-1 6H7Z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
+    <symbol id="i-alerta" viewBox="0 0 24 24"><path d="M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17v.01"/></symbol>
+    <symbol id="i-sirene" viewBox="0 0 24 24"><path d="M6 18v-6a6 6 0 0 1 12 0v6"/><path d="M4 18h16v3H4zM12 2v2M4.2 5.2l1.4 1.4M19.8 5.2l-1.4 1.4"/></symbol>
+    <symbol id="i-copo" viewBox="0 0 24 24"><path d="M5 3h14l-2 18H7L5 3Z"/><path d="M6 9h12"/></symbol>
+    <symbol id="i-arvore" viewBox="0 0 24 24"><path d="M12 22v-6"/><path d="M12 16a6 6 0 0 0 5.2-9 5 5 0 0 0-10.4 0A6 6 0 0 0 12 16Z"/></symbol>
+    <symbol id="i-pessoa" viewBox="0 0 24 24"><circle cx="13" cy="4" r="2"/><path d="m8 21 3-7 3 3v4M7 11l3-3h4l2 3 3 1M11 14l-1-6"/></symbol>
+    <symbol id="i-chapeu" viewBox="0 0 24 24"><path d="M2 16c3 2 17 2 20 0"/><path d="M6 16c0-5 2-9 6-9s6 4 6 9"/><circle cx="19" cy="5" r="2"/></symbol>
+    <symbol id="i-familia" viewBox="0 0 24 24"><circle cx="8" cy="6" r="2.5"/><circle cx="17" cy="9" r="2"/><path d="M4 21v-6a4 4 0 0 1 8 0v6M14 21v-4a3 3 0 0 1 6 0v4"/></symbol>
+    <symbol id="i-pausa" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></symbol>
+    <symbol id="i-saude" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></symbol>
+    <symbol id="i-vaso" viewBox="0 0 24 24"><path d="M3 16h18l-2 5H5l-2-5Z"/><path d="M12 16V8M12 8c-3 0-5-2-5-5 3 0 5 2 5 5ZM12 10c2.5 0 4.5-1.7 4.5-4.5-2.5 0-4.5 1.7-4.5 4.5Z"/></symbol>
+    <symbol id="i-caixa" viewBox="0 0 24 24"><path d="M4 7h16v13H4z"/><path d="M3 4h18v3H3z"/><path d="M8 13h8"/></symbol>
+    <symbol id="i-lixo" viewBox="0 0 24 24"><path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15"/></symbol>
+    <symbol id="i-virar" viewBox="0 0 24 24"><path d="M7 4h10l-1 10H8L7 4Z"/><path d="M4 20a8 8 0 0 0 16 0" transform="translate(0 -2)"/></symbol>
+    <symbol id="i-spray" viewBox="0 0 24 24"><path d="M8 9h7v12H8z"/><path d="M10 9V6h3v3M13 4h2M17 3l2-1M17 6h3M17 9l2 1"/></symbol>
+    <symbol id="i-casa" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v10H3V11Z"/><path d="M8 13h8v8H8zM12 13v8M8 17h8"/></symbol>
+  </svg>
+</body>
+</html>
