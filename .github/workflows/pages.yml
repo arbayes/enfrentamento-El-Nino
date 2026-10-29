@@ -1,8 +1,12 @@
 name: Publicar no GitHub Pages
 
+# Publica o site e, antes, atualiza dados/tempo.json com o INMET.
+# Roda a cada push na main e de hora em hora (o INMET mede de hora em hora).
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: "20 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -22,7 +26,21 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
+      - id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Testar o coletor do INMET
+        run: python3 -m unittest discover -s tests
+
+      - name: Atualizar dados do tempo (INMET)
+        env:
+          INMET_TOKEN: ${{ secrets.INMET_TOKEN }}
+        run: |
+          # Se o INMET estiver fora do ar, reaproveita o arquivo já publicado.
+          curl -fsS --max-time 20 "${{ steps.pages.outputs.base_url }}/dados/tempo.json" \
+            -o "$RUNNER_TEMP/tempo-anterior.json" || true
+          python3 scripts/coletar_tempo.py --anterior "$RUNNER_TEMP/tempo-anterior.json"
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .

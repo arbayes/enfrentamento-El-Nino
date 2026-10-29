@@ -21,10 +21,12 @@ O conteúdo segue a *Proposta de Site da Defesa Civil de Moeda (versão populaç
 index.html                   página única
 css/estilo.css               estilos (mobile-first, cores #164370 e #286896)
 js/painel.js                 preenche o painel do tempo a partir de dados/tempo.json
-dados/tempo.json             dados do painel (vazio até a integração com o INMET)
+dados/tempo.json             dados do painel (preenchido na publicação pelo coletor)
+scripts/coletar_tempo.py     coleta os dados do INMET e grava dados/tempo.json
+tests/                       testes do coletor, com respostas simuladas do INMET
 assets/img/                  logo e ícones
 manifest.webmanifest         nome e ícone ao salvar na tela inicial
-.github/workflows/pages.yml  publicação no GitHub Pages
+.github/workflows/pages.yml  coleta do INMET e publicação no GitHub Pages, de hora em hora
 ```
 
 Não há etapa de build: são arquivos estáticos.
@@ -56,7 +58,38 @@ Formato esperado:
 
 `umidade.tipo` pode ser `observada`, `prevista` ou `minima_prevista`, e o texto do painel muda conforme a escolha. Quando há dados, o nível correspondente é destacado no quadro de umidade.
 
-A integração automática com o INMET ainda não foi feita. Antes dela é preciso confirmar com o INMET qual produto e forma de acesso usar, qual estação representa Moeda e, com a Defesa Civil, qual umidade o quadro deve usar. Se a integração exigir credenciais, elas devem ficar fora do navegador (por exemplo, em uma rotina agendada do GitHub Actions que grava `dados/tempo.json`).
+`previsao[].umidade_min` também é gravado pelo coletor, mas o painel não o exibe.
+
+### De onde vêm os dados
+
+O workflow `pages.yml` roda a cada push na `main` e de hora em hora (minuto 20). Antes de publicar, ele executa `scripts/coletar_tempo.py`, que consulta o INMET fora do navegador:
+
+| Dado | Endereço | Token |
+|---|---|---|
+| Previsão de Moeda (código IBGE 3142304) | `apiprevmet3.inmet.gov.br/previsao/3142304` | Não |
+| Lista de estações | `apitempo.inmet.gov.br/estacoes/T` | Não |
+| Medições horárias da estação | `apitempo.inmet.gov.br/token/estacao/{início}/{fim}/{código}/{token}` | Sim |
+
+- **Com token:** o coletor escolhe a estação automática operante mais próxima de Moeda (até 60 km; a candidata esperada é a A555 Ibirité/Rola Moça) e usa a última umidade medida, se tiver no máximo 3 horas. As horas do INMET vêm em UTC e são gravadas no horário de Brasília.
+- **Sem token, ou se a estação falhar:** a umidade vem da previsão (`minima_prevista`, a menor umidade prevista para hoje).
+- **Se o INMET estiver fora do ar:** o coletor mantém o arquivo já publicado. Depois de 6 horas sem atualização, o painel mostra "Dados temporariamente indisponíveis".
+
+Os avisos de cada coleta aparecem na aba **Actions** do GitHub. O token nunca é escrito no log nem no arquivo.
+
+### Ativar as medições da estação
+
+1. Pedir o token de acesso à API ao INMET, de preferência por e-mail institucional da Prefeitura ou da Defesa Civil.
+2. No GitHub, abrir **Settings → Secrets and variables → Actions → New repository secret**, com o nome `INMET_TOKEN` e o token como valor.
+3. Rodar o workflow manualmente em **Actions → Publicar no GitHub Pages → Run workflow** e conferir o log. Se o INMET indicar outro formato de endereço para o token, ajuste `URL_MEDICOES` em `scripts/coletar_tempo.py`.
+
+### Testar o coletor
+
+```bash
+python3 -m unittest discover -s tests       # sem rede, com respostas simuladas
+python3 scripts/coletar_tempo.py --saida /tmp/tempo.json   # consulta o INMET de verdade
+```
+
+O GitHub pausa workflows agendados depois de 60 dias sem atividade no repositório. Se o painel ficar "indisponível" por muito tempo, confira se a rotina está ativa na aba **Actions**.
 
 ## Publicar no GitHub Pages
 
@@ -68,7 +101,7 @@ A integração automática com o INMET ainda não foi feita. Antes dela é preci
 
 - Validar as faixas de umidade e as orientações com a Defesa Civil e a Secretaria Municipal de Saúde.
 - Confirmar a identificação institucional da Defesa Civil.
-- Confirmar a estação e o produto meteorológico do INMET.
+- Confirmar com o INMET a estação de referência e cadastrar o `INMET_TOKEN`.
 - Publicar telefone ou contato institucional somente depois de confirmado pela Prefeitura.
 - Testar links, acessibilidade e o visual em Android e iPhone.
 - Atualizar a data de "Última revisão dos textos" no rodapé sempre que o conteúdo mudar.
