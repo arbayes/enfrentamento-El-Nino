@@ -1,0 +1,228 @@
+/* Moeda preparada para o El Niño 2026/2027 — estilo mobile-first */
+
+:root {
+  --azul: #164370;
+  --azul-2: #286896;
+  --azul-claro: #EAF4FB;
+  --branco: #FFFFFF;
+  --texto: #1B2733;
+  --texto-suave: #4A5A6A;
+  --borda: #CFE0EE;
+
+  /* Níveis: cor sempre acompanhada de texto e ícone */
+  --acompanhar: #2E7D32;
+  --acompanhar-fundo: #EAF5EA;
+  --atencao: #8A6100;
+  --atencao-barra: #F2C200;
+  --atencao-fundo: #FFF8DB;
+  --alerta: #A94300;
+  --alerta-barra: #F07C00;
+  --alerta-fundo: #FFEFE0;
+  --emergencia: #B3121F;
+  --emergencia-barra: #D6202E;
+  --emergencia-fundo: #FDE8EA;
+
+  --raio: 14px;
+  --espaco: 16px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  font-family: Inter, Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--texto);
+  background: var(--azul-claro);
+}
+
+[hidden] { display: none !important; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+h1, h2, h3 { line-height: 1.2; margin: 0 0 .6em; }
+h2 { font-size: 1.45rem; color: var(--azul); }
+h3 { font-size: 1.1rem; color: var(--azul); margin-top: 1.4em; }
+p { margin: 0 0 1em; }
+
+a { color: var(--azul-2); }
+a:focus-visible, .botao:focus-visible {
+  outline: 3px solid var(--atencao-barra);
+  outline-offset: 2px;
+}
+
+svg { width: 24px; height: 24px; flex: none;
+  fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.pular {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--branco); color: var(--azul); padding: 12px 16px; z-index: 10;
+}
+.pular:focus { left: 8px; top: 8px; }
+
+/* Cabeçalho */
+.topo__logo { width: 250px; margin: 0 auto 20px; }
+
+.topo__faixa {
+  background: linear-gradient(160deg, var(--azul) 0%, var(--azul-2) 100%);
+  color: var(--branco);
+  padding: 28px var(--espaco) 32px;
+  text-align: center;
+}
+.topo__orgao {
+  font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  opacity: .9; margin-bottom: .8em;
+}
+.topo h1 { font-size: 1.85rem; margin-bottom: .4em; }
+.topo__lema { font-size: 1.05rem; margin: 0; opacity: .95; }
+
+/* Atalhos */
+.atalhos {
+  position: sticky; top: 0; z-index: 5;
+  background: var(--azul);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .15);
+}
+.atalhos ul {
+  list-style: none; margin: 0; padding: 8px var(--espaco);
+  display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+}
+.atalhos ul::-webkit-scrollbar { display: none; }
+.atalhos a {
+  display: block; white-space: nowrap;
+  color: var(--branco); text-decoration: none; font-weight: 600; font-size: .95rem;
+  padding: 8px 14px; border-radius: 999px; background: rgba(255, 255, 255, .12);
+}
+.atalhos a:hover { background: rgba(255, 255, 255, .24); }
+
+/* Blocos */
+main { max-width: 760px; margin: 0 auto; padding: var(--espaco); }
+
+.bloco {
+  background: var(--branco);
+  border-radius: var(--raio);
+  padding: 24px 20px;
+  margin-bottom: var(--espaco);
+  box-shadow: 0 1px 3px rgba(22, 67, 112, .08);
+  scroll-margin-top: 64px;
+}
+
+.nota {
+  font-size: .95rem; color: var(--texto-suave);
+  border-left: 4px solid var(--azul-2);
+  background: var(--azul-claro);
+  padding: 12px 14px; border-radius: 0 8px 8px 0; margin: 1em 0 0;
+}
+
+/* Riscos */
+.riscos, .dicas { list-style: none; margin: 0 0 1em; padding: 0; display: grid; gap: 10px; }
+.riscos li, .dicas li {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 12px 14px; border-radius: 10px; background: var(--azul-claro);
+}
+.riscos svg, .dicas svg { color: var(--azul-2); margin-top: 1px; }
+
+/* Painel */
+.painel__aviso {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: var(--azul-claro); border: 1px dashed var(--azul-2);
+  border-radius: 10px; padding: 14px; margin-bottom: 16px;
+}
+.painel__aviso svg { color: var(--azul-2); }
+.painel__aviso p { margin: 0 0 .3em; }
+.painel__aviso p:last-child { margin: 0; }
+
+.painel__agora {
+  background: linear-gradient(160deg, var(--azul) 0%, var(--azul-2) 100%);
+  color: var(--branco); border-radius: 12px; padding: 18px; text-align: center; margin-bottom: 12px;
+}
+.painel__rotulo { margin: 0; font-size: .95rem; opacity: .95; }
+.painel__umidade { font-size: 3.2rem; font-weight: 800; line-height: 1.1; margin: .1em 0; }
+.painel__unidade { font-size: 1.6rem; margin-left: 2px; }
+.painel__nivel {
+  display: inline-block; margin: 6px 0 0; padding: 4px 12px; border-radius: 999px;
+  background: var(--branco); color: var(--texto); font-weight: 700;
+}
+.painel__nivel:empty { display: none; }
+
+.painel__dias { list-style: none; padding: 0; margin: 0 0 12px; display: grid; gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+.painel__dias li { border: 1px solid var(--borda); border-radius: 10px; padding: 10px 12px; }
+.painel__dias .dia { font-weight: 700; color: var(--azul); display: block; }
+.painel__dias .cond { display: block; font-size: .95rem; }
+.painel__dias .temp { display: block; font-size: .95rem; color: var(--texto-suave); }
+
+.painel__meta { margin: 0 0 16px; display: grid; gap: 6px; font-size: .95rem; }
+.painel__meta div { display: flex; flex-wrap: wrap; gap: 4px 8px; }
+.painel__meta dt { font-weight: 700; }
+.painel__meta dt::after { content: ":"; }
+.painel__meta dd { margin: 0; }
+
+.botao {
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  min-height: 52px; padding: 12px 18px; border-radius: 12px;
+  background: var(--azul); color: var(--branco); font-weight: 700; text-decoration: none;
+}
+.botao:hover { background: var(--azul-2); }
+
+.fonte { font-size: .85rem; color: var(--texto-suave); margin: 12px 0 0; }
+
+/* Níveis de umidade */
+.niveis { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.nivel { border-radius: 12px; padding: 14px 16px; border-left: 8px solid; }
+.nivel p { margin: 8px 0 0; }
+.nivel__cabeca { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.nivel__nome { font-weight: 800; text-transform: uppercase; letter-spacing: .03em; font-size: 1.05rem; }
+.nivel__faixa { margin-left: auto; font-weight: 700; padding: 2px 10px; border-radius: 999px; background: var(--branco); font-size: .95rem; }
+
+.nivel--acompanhar { background: var(--acompanhar-fundo); border-color: var(--acompanhar); }
+.nivel--acompanhar .nivel__cabeca { color: var(--acompanhar); }
+.nivel--atencao { background: var(--atencao-fundo); border-color: var(--atencao-barra); }
+.nivel--atencao .nivel__cabeca { color: var(--atencao); }
+.nivel--alerta { background: var(--alerta-fundo); border-color: var(--alerta-barra); }
+.nivel--alerta .nivel__cabeca { color: var(--alerta); }
+.nivel--emergencia { background: var(--emergencia-fundo); border-color: var(--emergencia-barra); }
+.nivel--emergencia .nivel__cabeca { color: var(--emergencia); }
+.nivel__faixa { color: var(--texto); }
+
+/* Destaca o nível atual quando o painel tiver dados */
+.nivel.atual { outline: 3px solid var(--azul); outline-offset: 2px; }
+.nivel.atual .nivel__nome::after { content: " · agora"; text-transform: none; font-weight: 700; }
+
+/* Destaque de saúde */
+.destaque {
+  display: flex; gap: 12px; align-items: flex-start; margin: 0;
+  background: var(--azul); color: var(--branco); border-radius: 10px; padding: 14px; font-weight: 600;
+}
+
+/* Links oficiais */
+.links { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.links a {
+  display: block; padding: 14px 16px; border-radius: 12px; text-decoration: none;
+  border: 2px solid var(--borda); background: var(--branco);
+}
+.links a:hover { border-color: var(--azul-2); }
+.links__titulo { display: block; font-weight: 700; color: var(--azul); }
+.links__url { display: block; font-size: .9rem; color: var(--texto-suave); }
+
+/* Rodapé */
+.rodape {
+  background: var(--azul); color: var(--branco);
+  padding: 28px var(--espaco) 36px; font-size: .95rem;
+}
+.rodape > * { max-width: 760px; margin-left: auto; margin-right: auto; }
+.rodape p { margin-bottom: .6em; }
+.rodape__aviso { opacity: .9; margin-top: 1em; }
+.rodape__revisao { opacity: .8; font-size: .85rem; }
+
+/* Telas maiores */
+@media (min-width: 640px) {
+  .topo__logo { width: 300px; }
+  .topo h1 { font-size: 2.4rem; }
+  .bloco { padding: 28px 32px; }
+  .riscos, .dicas { grid-template-columns: 1fr 1fr; }
+  .atalhos ul { justify-content: center; }
+}
